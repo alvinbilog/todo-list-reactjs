@@ -8,6 +8,9 @@ body {
     #cf556c 78%,
     #b12a5b 100%
   );
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 .todo-item {
   list-style-type: none;
