@@ -1,13 +1,23 @@
 import React from "react";
 
-const Form = ({ inputText, setInputText, setTodos, todos }) => {
+const Form = ({
+  inputText,
+  setInputText,
+  setTodos,
+  todos,
+  status,
+  setStatus,
+}) => {
+  const statusHandler = e => {
+    setStatus(e.target.value);
+  };
   const inputTextHandler = e => {
     setInputText(e.target.value);
-    console.log(e.target.value);
   };
 
   const submitTodoHandler = e => {
     e.preventDefault();
+    //e.target.value is not working so I used this one.
     if (e.target.parentElement.previousSibling.defaultValue === "") {
       alert("Todo list is empty!");
     } else {
@@ -32,6 +42,13 @@ const Form = ({ inputText, setInputText, setTodos, todos }) => {
       <button type="submit" onClick={submitTodoHandler}>
         <i className="fas fa-plus"></i>
       </button>
+      <div className="select">
+        <select onChange={statusHandler} name="todos" className="filter-todo">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="uncompleted">Uncompleted</option>
+        </select>
+      </div>
     </form>
   );
 };
