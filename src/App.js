@@ -10,8 +10,12 @@ const App = () => {
   const [filteredTodos, setFilteredTodos] = useState([]);
 
   useEffect(() => {
+    getLocalTodos();
+  }, []);
+
+  useEffect(() => {
     filterHandler();
-    console.log("effect has started");
+    saveLocalTodos();
   }, [todos, status]);
 
   //filtering completed, all and uncomplete
@@ -22,6 +26,21 @@ const App = () => {
       setFilteredTodos(todos.filter(todo => todo.completed === false));
     } else {
       setFilteredTodos(todos);
+    }
+  };
+
+  //Save to local
+  const saveLocalTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
+  //get from local
+  const getLocalTodos = () => {
+    if (localStorage.getItem("todos") === null) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+
+      setTodos(todoLocal);
     }
   };
   return (
